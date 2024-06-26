@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+#  psql-db:
+#    image: postgres:15.1-alpine
+#    container_name: psql-db
+#    restart: always
+#    environment:
+#      - POSTGRES_USER=postgres
+#      - POSTGRES_PASSWORD=123
+#      - POSTGRES_DB=mydb
+#      - POSTGRES_HOST_AUTH_METHOD=trust
+#    ports:
+#      - "5432:5432"
+#    volumes:
+#      - ./src/main/resources/db-init/:/docker-entrypoint-initdb.d
+  app:
+    build:
+      context: .
+    container_name: demo
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://dpg-cptul3pu0jms73eg00vg-a:5432/mydb_i4s5?currentSchema=moykachi
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=93Z2KCgYOP2HtizgE7Fpei1yLcEgoroo
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - '8080:8080'
