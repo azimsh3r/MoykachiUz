@@ -8,8 +8,7 @@ CREATE TABLE IF NOT EXISTS auto_user (
     first_name VARCHAR(255),
     last_name VARCHAR(255),
     phone_number VARCHAR(255),
-    created_at timestamp,
-    is_busy bool
+    created_at timestamp
 );
 
 -- Create table auto_brand
@@ -33,7 +32,9 @@ CREATE TABLE IF NOT EXISTS auto_instance(
     color VARCHAR(255),
     number VARCHAR(255),
     model_id BIGINT,
-    FOREIGN KEY (model_id) REFERENCES auto_model(id)
+    FOREIGN KEY (model_id) REFERENCES auto_model(id),
+    user_id BIGINT,
+    FOREIGN KEY (user_id) REFERENCES auto_user(id)
 );
 
 -- Create table authentication_principal
@@ -45,4 +46,15 @@ CREATE TABLE IF NOT EXISTS authentication_principal(
     chat_id BIGINT,
     user_id BIGINT,
     FOREIGN KEY (user_id) REFERENCES auto_user(id)
+);
+
+-- Create table authentication_principal
+CREATE TABLE IF NOT EXISTS auto_workflow (
+    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    started_at timestamp,
+    finished_at timestamp,
+    user_id BIGINT,
+    auto_id BIGINT,
+    FOREIGN KEY (user_id) REFERENCES auto_user(id),
+    FOREIGN KEY (auto_id) REFERENCES auto_instance(id)
 );

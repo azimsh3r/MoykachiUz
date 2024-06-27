@@ -4,7 +4,7 @@ import jakarta.persistence.*
 import java.time.LocalDateTime
 
 @Entity
-@Table(name="authentication_principal", schema = "moykachi")
+@Table(name="authentication_principal")//, schema = "moykachi")
 class AuthPrincipal {
     @Column(name = "otp")
     var otp: Int? = null

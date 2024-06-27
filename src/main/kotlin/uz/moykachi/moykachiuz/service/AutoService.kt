@@ -44,4 +44,6 @@ class AutoService @Autowired constructor (private val autoBrandRepository: AutoB
         //Saves individual car instance
         autoInstanceRepository.save(autoInstance)
     }
+
+    fun findAllById(id : Int) = autoInstanceRepository.findAllById(id)
 }

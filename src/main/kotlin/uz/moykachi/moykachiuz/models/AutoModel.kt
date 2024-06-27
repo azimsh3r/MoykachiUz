@@ -7,7 +7,7 @@ import uz.moykachi.moykachiuz.models.AutoInstance
 import kotlin.jvm.Transient
 
 @Entity
-@Table(name = "auto_model", schema = "moykachi")
+@Table(name = "auto_model")//, schema = "moykachi")
 class AutoModel {
 
     @Id
