@@ -27,13 +27,10 @@ class User {
     @Column(name = "created_at")
     var createdAt: LocalDateTime = LocalDateTime.now()
 
-    @OneToMany(mappedBy = "user")
-    lateinit var autoInstance : List<AutoInstance>
-
     @Transient
     @OneToOne(mappedBy = "user", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     var authPrincipal: AuthPrincipal? = null
 
     @OneToMany(mappedBy = "user")
-    var workflowList: List<Workflow>? = null
+    var washRegistryList: List<WashRegistry>? = null
 }

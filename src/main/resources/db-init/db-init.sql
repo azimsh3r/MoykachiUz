@@ -32,9 +32,7 @@ CREATE TABLE IF NOT EXISTS auto_instance(
     color VARCHAR(255),
     number VARCHAR(255),
     model_id BIGINT,
-    FOREIGN KEY (model_id) REFERENCES auto_model(id),
-    user_id BIGINT,
-    FOREIGN KEY (user_id) REFERENCES auto_user(id)
+    FOREIGN KEY (model_id) REFERENCES auto_model(id)
 );
 
 -- Create table authentication_principal
@@ -49,7 +47,7 @@ CREATE TABLE IF NOT EXISTS authentication_principal(
 );
 
 -- Create table authentication_principal
-CREATE TABLE IF NOT EXISTS auto_workflow (
+CREATE TABLE IF NOT EXISTS auto_wash_registry (
     id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     started_at timestamp,
     finished_at timestamp,
