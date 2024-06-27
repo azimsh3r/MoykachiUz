@@ -5,7 +5,7 @@ import java.time.LocalDateTime
 import kotlin.jvm.Transient
 
 @Entity
-@Table(name = "auto_user", schema = "moykachi")
+@Table(name = "auto_user")//, schema = "moykachi")
 class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +27,13 @@ class User {
     @Column(name = "created_at")
     var createdAt: LocalDateTime = LocalDateTime.now()
 
+    @OneToMany(mappedBy = "user")
+    lateinit var autoInstance : List<AutoInstance>
+
     @Transient
     @OneToOne(mappedBy = "user", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     var authPrincipal: AuthPrincipal? = null
+
+    @OneToMany(mappedBy = "user")
+    var workflowList: List<Workflow>? = null
 }

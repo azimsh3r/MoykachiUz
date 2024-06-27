@@ -10,20 +10,18 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.BindingResult
-import org.springframework.validation.FieldError
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import uz.moykachi.moykachiuz.util.ValidationExceptionHandler
 import java.time.LocalDateTime
-import java.util.function.Consumer
 
 @RestController
 @RequestMapping("/auth")
-class AuthController @Autowired constructor(val authService: AuthService, val jwtUtil: JWTUtil) {
+class AuthController @Autowired constructor(val authService: AuthService, val jwtUtil: JWTUtil, val validationExceptionHandler: ValidationExceptionHandler) {
     @PostMapping("/login")
     fun login(@RequestBody response : String) {
-        println(response)
         authService.processMessage(response)
     }
 
@@ -33,14 +31,7 @@ class AuthController @Autowired constructor(val authService: AuthService, val jw
         bindingResult: BindingResult
     ) : ResponseEntity<out Any> {
         if(bindingResult.hasErrors()) {
-            val stringBuilder = StringBuilder()
-            val fieldErrorList = bindingResult.fieldErrors
-            fieldErrorList.forEach(Consumer { fieldError: FieldError ->
-                stringBuilder.append(
-                    fieldError.defaultMessage
-                ).append(" ")
-            })
-            return ResponseEntity(ExceptionResponse(stringBuilder.toString()), HttpStatus.BAD_REQUEST)
+            return validationExceptionHandler.handleValidationException(bindingResult)
         }
 
         try {

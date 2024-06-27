@@ -25,4 +25,6 @@ class UserService (@Autowired val userRepository: UserRepository) {
     fun findAllByToken(token: String) : UserDetails = AuthDetails(userRepository.findUserByToken(token))
 
     fun findAllByPhoneNumber(phoneNumber: String) = userRepository.findAllByPhoneNumber(phoneNumber)
+
+    fun findAllById(id : Int): List<User> = userRepository.findAllById(id)
 }

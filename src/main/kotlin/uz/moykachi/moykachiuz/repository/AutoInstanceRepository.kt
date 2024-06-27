@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository
 @Repository
 interface AutoInstanceRepository : JpaRepository<AutoInstance, Int> {
     fun findAllByNumber (number: String) : List<AutoInstance>
+
+    fun findAllById(id : Int) : List<AutoInstance>
 }

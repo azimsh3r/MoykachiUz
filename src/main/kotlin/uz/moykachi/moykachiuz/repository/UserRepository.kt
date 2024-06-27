@@ -12,4 +12,6 @@ interface UserRepository : JpaRepository<User, Int> {
 
     @Query("Select u FROM User u JOIN AuthPrincipal ap ON u.id = ap.user.id WHERE ap.token = :token")
     fun findUserByToken (@Param("token") token: String) : User
+
+    fun findAllById(id: Int) : List<User>
 }

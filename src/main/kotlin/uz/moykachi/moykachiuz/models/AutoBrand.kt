@@ -4,7 +4,7 @@ import jakarta.persistence.*
 import kotlin.jvm.Transient
 
 @Entity
-@Table(name = "auto_brand", schema = "moykachi")
+@Table(name = "auto_brand" )//, schema = "moykachi")
 class AutoBrand {
 
     @Id
