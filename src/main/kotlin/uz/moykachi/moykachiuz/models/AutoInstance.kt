@@ -23,10 +23,7 @@ class AutoInstance {
     @Column(name = "number")
     lateinit var number: String
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    lateinit var user: User
-
     @OneToMany(mappedBy = "auto")
-    lateinit var workflowList : List<Workflow>
+    @JsonIgnore
+    lateinit var washRegistryList : List<WashRegistry>
 }

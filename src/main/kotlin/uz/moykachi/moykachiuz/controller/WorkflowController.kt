@@ -15,13 +15,13 @@ import uz.moykachi.moykachiuz.exception.SuccessResponse
 import uz.moykachi.moykachiuz.models.AutoInstance
 import uz.moykachi.moykachiuz.models.User
 import uz.moykachi.moykachiuz.util.ValidationExceptionHandler
-import uz.moykachi.moykachiuz.models.Workflow
-import uz.moykachi.moykachiuz.service.WorkflowService
+import uz.moykachi.moykachiuz.models.WashRegistry
+import uz.moykachi.moykachiuz.service.WashRegistryService
 import uz.moykachi.moykachiuz.util.WorkflowValidator
 
 @RestController
 @RequestMapping("/workflow")
-class WorkflowController @Autowired  constructor (val modelMapper: ModelMapper, val workflowService: WorkflowService, val validationExceptionHandler: ValidationExceptionHandler, val workflowValidator: WorkflowValidator) {
+class WorkflowController @Autowired  constructor (val modelMapper: ModelMapper, val washRegistryService: WashRegistryService, val validationExceptionHandler: ValidationExceptionHandler, val workflowValidator: WorkflowValidator) {
     @PostMapping
     fun registerCarWash(@Valid @RequestBody workflowDTO: WorkflowDTO, bindingResult: BindingResult) : ResponseEntity<out Any> {
         workflowValidator.validate(workflowDTO, bindingResult)
@@ -30,15 +30,11 @@ class WorkflowController @Autowired  constructor (val modelMapper: ModelMapper, 
             return validationExceptionHandler.handleValidationException(bindingResult)
         }
 
-        workflowService.save( Workflow().apply {
+        washRegistryService.save( WashRegistry().apply {
             user = User().apply { id = workflowDTO.userId!! }
             auto = AutoInstance().apply { id = workflowDTO.autoId!! }
         } )
 
         return ResponseEntity(SuccessResponse(), HttpStatus.OK)
     }
-
-    private fun convertDTOToModel(workflowDTO: WorkflowDTO) = modelMapper.map(workflowDTO, Workflow::class.java)
-
-    private fun convertModelToDTO(workflow: Workflow) = modelMapper.map(workflow, WorkflowDTO::class.java)
 }

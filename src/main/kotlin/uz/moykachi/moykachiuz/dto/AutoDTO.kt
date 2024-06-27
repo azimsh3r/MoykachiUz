@@ -12,9 +12,9 @@ class AutoDTO {
 
     @Size(min = 3, message = "Color is invalid")
     @NotNull("Color is null")
-    val color : String? = null
+    var color : String? = null
 
     @NotNull("Number is null")
     @Size(min=6, message = "Car Plate Number is invalid")
-    val number: String? = null
+    var number: String? = null
 }

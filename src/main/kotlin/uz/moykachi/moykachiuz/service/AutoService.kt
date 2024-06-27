@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional
 class AutoService @Autowired constructor (private val autoBrandRepository: AutoBrandRepository, private val autoModelRepository: AutoModelRepository, private val autoInstanceRepository: AutoInstanceRepository, val modelMapper : ModelMapper) {
 
-    fun findAll() : List<AutoInstance> = autoInstanceRepository.findAll()
+    fun findAll() : List<AutoDTO> = autoInstanceRepository.findAll().map {convertModelToDTO(it)}
 
     fun getAutoByNumber (plateNumber : String) : List<AutoInstance> = autoInstanceRepository.findAllByNumber(plateNumber)
 
@@ -46,4 +46,13 @@ class AutoService @Autowired constructor (private val autoBrandRepository: AutoB
     }
 
     fun findAllById(id : Int) = autoInstanceRepository.findAllById(id)
+
+    private fun convertModelToDTO(autoInstance: AutoInstance) : AutoDTO {
+        val autoDTO = AutoDTO()
+        autoDTO.number = autoInstance.number
+        autoDTO.model = autoInstance.autoModel.model
+        autoDTO.brand = autoInstance.autoModel.autoBrand.brand
+        autoDTO.color = autoInstance.color
+        return autoDTO
+    }
 }
