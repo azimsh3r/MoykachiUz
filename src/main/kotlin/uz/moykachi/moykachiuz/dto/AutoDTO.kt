@@ -15,6 +15,6 @@ class AutoDTO {
     var color : String? = null
 
     @NotNull("Number is null")
-    @Size(min=6, message = "Car Plate Number is invalid")
+    @Size(min=6, max = 6, message = "Car Plate Number is invalid")
     var number: String? = null
 }

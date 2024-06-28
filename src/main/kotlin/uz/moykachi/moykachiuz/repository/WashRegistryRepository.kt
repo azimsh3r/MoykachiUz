@@ -10,6 +10,6 @@ import uz.moykachi.moykachiuz.models.WashRegistry
 @Repository
 interface WashRegistryRepository : JpaRepository<WashRegistry, Int> {
 
-    @Query("FROM WashRegistry WHERE user = :user ORDER BY id DESC")
-    fun findLastWorkflowByUser(@Param("user") user : User) : WashRegistry?
+    @Query("FROM WashRegistry WHERE user.id = :userId ORDER BY id DESC")
+    fun findLastWorkflowByUser(@Param("userId") userId : Int) : List<WashRegistry>
 }

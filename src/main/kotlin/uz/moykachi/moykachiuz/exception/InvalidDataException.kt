@@ -1,3 +1,3 @@
 package uz.moykachi.moykachiuz.exception
 
-class InvalidDataException(message: String) : Exception(message)
+class InvalidDataException(message: String) : RuntimeException(message)
