@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface AuthenticationRepository : JpaRepository<AuthPrincipal, Int> {
-    fun findAllByUser(user : User) : List<AuthPrincipal>
 
     fun findAllByToken(token : String) : List<AuthPrincipal>
 

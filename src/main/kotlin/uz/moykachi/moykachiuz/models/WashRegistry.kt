@@ -4,7 +4,7 @@ import jakarta.persistence.*
 import java.time.LocalDateTime
 
 @Entity
-@Table(name = "auto_workflow")//, schema = "moykachi")
+@Table(name = "auto_wash_registry")//, schema = "moykachi")
 class WashRegistry {
     @Id
     @Column(name="id")
