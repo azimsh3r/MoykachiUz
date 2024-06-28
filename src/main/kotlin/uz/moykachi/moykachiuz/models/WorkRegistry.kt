@@ -5,7 +5,7 @@ import java.time.LocalDateTime
 
 @Entity
 @Table(name = "auto_wash_registry")//, schema = "moykachi")
-class WashRegistry {
+class WorkRegistry {
     @Id
     @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

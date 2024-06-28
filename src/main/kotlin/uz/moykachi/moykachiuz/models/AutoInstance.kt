@@ -25,5 +25,5 @@ class AutoInstance {
 
     @OneToMany(mappedBy = "auto")
     @JsonIgnore
-    lateinit var washRegistryList : List<WashRegistry>
+    lateinit var workRegistryList : List<WorkRegistry>
 }
