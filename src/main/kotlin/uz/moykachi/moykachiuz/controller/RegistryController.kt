@@ -42,9 +42,9 @@ class RegistryController @Autowired  constructor (val modelMapper: ModelMapper, 
     }
 
     @PostMapping("/finishWash")
-    fun finishWash(@RequestParam("userId", required = false) userId : Int) : ResponseEntity<out Any> {
+    fun finishWash(@RequestParam("userId", required = false) userId : Int?) : ResponseEntity<out Any> {
         try {
-            washRegistryService.finishWash(userId)
+            washRegistryService.finishWash(userId ?: return ResponseEntity(ExceptionResponse("userId param must be provided"), HttpStatus.BAD_REQUEST))
         } catch (e: RuntimeException) {
             return ResponseEntity(ExceptionResponse(e.message!!), HttpStatus.BAD_REQUEST)
         }
