@@ -2,18 +2,18 @@ package uz.moykachi.moykachiuz.service
 
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import uz.moykachi.moykachiuz.dto.AuthPrincipalDTO
-import uz.moykachi.moykachiuz.exception.InvalidCredentialsException
-import uz.moykachi.moykachiuz.models.AuthPrincipal
-import uz.moykachi.moykachiuz.models.User
-import uz.moykachi.moykachiuz.repository.AuthenticationRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.client.RestClient
+import uz.moykachi.moykachiuz.dto.AuthPrincipalDTO
+import uz.moykachi.moykachiuz.exception.InvalidCredentialsException
+import uz.moykachi.moykachiuz.models.AuthPrincipal
+import uz.moykachi.moykachiuz.models.User
+import uz.moykachi.moykachiuz.repository.AuthenticationRepository
 import java.time.LocalDateTime
-import java.util.Random
+import java.util.*
 
 @Service
 @Transactional
@@ -48,7 +48,7 @@ class AuthService @Autowired constructor(val userService: UserService, val authe
 
                 if (text.contains("/start") && text.length > 7) {
                     handleStartCommand(text, name, chatId)
-                } else if (message.has("contact") && verifyPhoneNumber(message, chatId)) {
+                } else if (message.has("contact")) {
                     handleContactMessage(message, chatId)
                 }
             }
@@ -56,7 +56,15 @@ class AuthService @Autowired constructor(val userService: UserService, val authe
     }
 
     private fun handleStartCommand (text: String, name: String, chatId: Int) {
-        sendMessage("Salom $name \uD83D\uDC4B\nBotga xush kelibsiz\n⬇\uFE0F Kontaktingizni yuboring (tugmani bosib)", chatId, true)
+        val keyboard = mapOf(
+            "keyboard" to listOf(
+                listOf(mapOf("text" to "Get Contact", "request_contact" to true)),
+            ),
+            "resize_keyboard" to true,
+            "one_time_keyboard" to true
+        )
+
+        sendMessage("Salom $name \uD83D\uDC4B\nBotga xush kelibsiz\n⬇\uFE0F Kontaktingizni yuboring (tugmani bosib)", chatId, keyboard)
 
         val token = text.substringAfter("/start ")
 
@@ -77,6 +85,11 @@ class AuthService @Autowired constructor(val userService: UserService, val authe
     }
 
     private fun handleContactMessage (message: JsonObject, chatId: Int) {
+        if (!verifyPhoneNumber(message, chatId)) {
+            sendMessage("Invalid Contact Details! Please send your own contact details!", chatId)
+            return
+        }
+
         val otp = generateOTP()
 
         val user = extractUserDataFromMessage(message)
@@ -119,15 +132,7 @@ class AuthService @Autowired constructor(val userService: UserService, val authe
         return user
     }
 
-    private fun sendMessage (text : String, chatId : Int, requestContact : Boolean = false) {
-        val keyboard = mapOf(
-            "keyboard" to listOf(
-                listOf(mapOf("text" to "Get Contact", "request_contact" to requestContact)),
-            ),
-            "resize_keyboard" to true,
-            "one_time_keyboard" to true
-        )
-
+    private fun sendMessage (text : String, chatId : Int, keyboard : Map<String, Any> = HashMap()) {
         RestClient
             .builder()
             .baseUrl("https://api.telegram.org/bot$BOT_TOKEN")
