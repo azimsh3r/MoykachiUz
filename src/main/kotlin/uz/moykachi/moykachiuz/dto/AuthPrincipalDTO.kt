@@ -2,7 +2,6 @@ package uz.moykachi.moykachiuz.dto
 
 import jakarta.validation.constraints.Size
 import org.jetbrains.annotations.NotNull
-import kotlin.properties.Delegates
 
 class AuthPrincipalDTO {
     @NotNull("One-Time password cannot be null")

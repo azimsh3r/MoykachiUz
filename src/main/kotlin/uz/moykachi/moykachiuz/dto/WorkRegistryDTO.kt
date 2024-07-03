@@ -2,7 +2,7 @@ package uz.moykachi.moykachiuz.dto
 
 import org.jetbrains.annotations.NotNull
 
-class WashRegistryDTO {
+class WorkRegistryDTO {
     @NotNull("userId cannot be null!")
     var userId : Int? = null
 

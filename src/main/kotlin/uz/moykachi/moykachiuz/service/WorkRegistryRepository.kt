@@ -4,16 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import uz.moykachi.moykachiuz.exception.InvalidDataException
-import uz.moykachi.moykachiuz.models.User
-import uz.moykachi.moykachiuz.models.WashRegistry
-import uz.moykachi.moykachiuz.repository.WashRegistryRepository
+import uz.moykachi.moykachiuz.models.WorkRegistry
+import uz.moykachi.moykachiuz.repository.WorkRegistryRepository
 import java.time.LocalDateTime
 
 @Service
 @Transactional
-class WashRegistryService @Autowired constructor(private val washRegistryRepository: WashRegistryRepository) {
+class WorkRegistryRepository @Autowired constructor(private val workRegistryRepository: WorkRegistryRepository) {
 
-    private fun findLastWorkByUser(userId: Int) : List<WashRegistry> = washRegistryRepository.findLastWorkflowByUser(userId)
+    private fun findLastWorkByUser(userId: Int) : List<WorkRegistry> = workRegistryRepository.findLastWorkflowByUser(userId)
 
     fun isBusy(userId: Int) : Boolean {
         val last = findLastWorkByUser(userId)
@@ -35,7 +34,7 @@ class WashRegistryService @Autowired constructor(private val washRegistryReposit
         }
     }
 
-    fun save(washRegistry: WashRegistry) {
-        washRegistryRepository.save(washRegistry)
+    fun save(workRegistry: WorkRegistry) {
+        workRegistryRepository.save(workRegistry)
     }
 }

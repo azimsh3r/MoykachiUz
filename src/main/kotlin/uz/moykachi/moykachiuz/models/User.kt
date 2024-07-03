@@ -32,5 +32,5 @@ class User {
     var authPrincipal: AuthPrincipal? = null
 
     @OneToMany(mappedBy = "user")
-    var washRegistryList: List<WashRegistry>? = null
+    var workRegistryList: List<WorkRegistry>? = null
 }
