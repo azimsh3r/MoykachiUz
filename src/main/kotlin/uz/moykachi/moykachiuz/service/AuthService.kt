@@ -48,7 +48,7 @@ class AuthService @Autowired constructor(val userService: UserService, val authe
 
                 if (text.contains("/start") && text.length > 7) {
                     handleStartCommand(text, name, chatId)
-                } else if (response.contains("\"contact\":{\"phone_number\"") && verifyPhoneNumber(message, chatId)) {
+                } else if (message.has("contact") && verifyPhoneNumber(message, chatId)) {
                     handleContactMessage(message, chatId)
                 }
             }
@@ -115,7 +115,7 @@ class AuthService @Autowired constructor(val userService: UserService, val authe
             user.phoneNumber = "+${user.phoneNumber}"
         }
 
-        user.role = "ROLE_USER"
+        user.role = "ROLE_EMPLOYEE"
         return user
     }
 
