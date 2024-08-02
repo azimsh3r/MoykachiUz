@@ -1,62 +1,43 @@
-Here is a suggested `README.md` for the **MoykachiUz** project:
+Here's the updated README draft:
 
 ---
 
 # MoykachiUz
 
-API for the MoykachiUz AutoWash app, developed to manage car wash services.
+**MoykachiUz** is an API designed for the MoykachiUz AutoWash app, providing seamless integration for car wash services. This API allows users to book appointments, manage services, and track orders, aiming to streamline the car wash experience.
 
-## Table of Contents
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Endpoints](#endpoints)
-- [Technologies Used](#technologies-used)
-- [Contributing](#contributing)
-- [License](#license)
-
-## Installation
-
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/azimsh3r/MoykachiUz.git
-   ```
-2. Navigate to the project directory:
-   ```sh
-   cd MoykachiUz
-   ```
-3. Build and run the application using Docker:
-   ```sh
-   docker-compose up --build
-   ```
-
-## Usage
-
-The API provides various endpoints to manage car wash services. Refer to the [Endpoints](#endpoints) section for detailed information.
+## Features
+- **Appointment Booking:** Schedule and manage car wash appointments.
+- **Service Management:** Browse available services and pricing.
+- **Order Tracking:** Monitor the status of ongoing services.
+- **Authentication:** Carried out using a separate Telegram bot and temporary codes for secure access.
 
 ## Endpoints
+### `POST /appointments`
+Create a new appointment.
 
-- **`/api/bookings`**: Manage bookings
-- **`/api/users`**: Manage user profiles
-- **`/api/payments`**: Handle payments
+### `GET /services`
+Retrieve a list of available services.
 
-Refer to the API documentation for detailed usage.
+### `GET /orders/:id`
+Get the status of a specific order.
 
-## Technologies Used
+## Problems Solved
+- Simplifies the booking process for car washes.
+- Provides a centralized system for managing services.
+- Offers real-time tracking of orders and services.
 
-- **Kotlin**: Main programming language
-- **Spring Boot**: Backend framework
-- **Docker**: Containerization
-- **Gradle**: Build tool
+## Installation
+1. Clone the repository.
+2. Install dependencies: `npm install`
+3. Start the server: `npm start`
 
 ## Contributing
-
-Contributions are welcome! Please fork this repository and submit a pull request.
+Contributions are welcome! Please fork the repository and create a pull request.
 
 ## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License.
 
 ---
 
-Feel free to customize this template according to the project's specifics and requirements.
+Does this draft cover everything you'd like, or are there any additional details or changes you want to include?
