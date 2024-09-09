@@ -12,16 +12,6 @@ Here's the updated README draft:
 - **Order Tracking:** Monitor the status of ongoing services.
 - **Authentication:** Carried out using a separate Telegram bot and temporary codes for secure access.
 
-## Endpoints
-### `POST /appointments`
-Create a new appointment.
-
-### `GET /services`
-Retrieve a list of available services.
-
-### `GET /orders/:id`
-Get the status of a specific order.
-
 ## Problems Solved
 - Simplifies the booking process for car washes.
 - Provides a centralized system for managing services.
